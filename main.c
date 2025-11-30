@@ -86,10 +86,10 @@ I16 main(I16 argc, Ch **argv) {
             file_type_str = "OTHER";
         }
         if (curr_entry->type == FileEntryType_FILE) {
-            print_fmt("%-32s %-8s %08llx\n", curr_entry->name, file_type_str, 
+            print_fmt("%-32.32s %-8s %08llx\n", curr_entry->name, file_type_str, 
                 curr_entry->sz);
         } else {
-            print_fmt("%-32s %-8s\n", curr_entry->name, file_type_str);
+            print_fmt("%-32.32s %-8s\n", curr_entry->name, file_type_str);
         }
     }
     print_ln("==================================================");
