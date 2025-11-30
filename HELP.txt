@@ -1,0 +1,8 @@
+dl - directory listing
+
+SYNOPSIS
+    dl [PATH] [OPTS]
+
+OPTIONS
+    -h              show this help text
+    -v              show version info
