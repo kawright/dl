@@ -101,4 +101,6 @@ I16 main(I16 argc, Ch **argv) {
     free_mem(ver_file_txt);
     free_mem(help_file_txt);
     free_file_list(&file_list);
+
+    return err.code;
 }

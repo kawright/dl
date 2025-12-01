@@ -2,7 +2,7 @@
 
 PROJ_NAME := dl
 PROJ_DESC := "directory listing"
-PROJ_VER := 1.1
+PROJ_VER := 1.2
 
 # ----- COMPILER CONFIGURATION -----
 
