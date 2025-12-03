@@ -2,7 +2,7 @@
 
 PROJ_NAME := dl
 PROJ_DESC := "directory listing"
-PROJ_VER := 1.2
+PROJ_VER := 1.4
 
 # ----- COMPILER CONFIGURATION -----
 
@@ -14,10 +14,12 @@ CC_OPTS := \
 	# -DDEBUG_MODE
 CC_LIBS := \
 	-largvp \
+	-larr \
 	-lfileio \
 	-lerr \
 	-lmem \
-	-lprint
+	-lprint \
+	-lstr
 
 # ----- REAL TARGETS -----
 

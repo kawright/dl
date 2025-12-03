@@ -4,5 +4,9 @@ SYNOPSIS
     dl [PATH] [OPTS]
 
 OPTIONS
+    -d              show directories only
+    -f              show files only    
     -h              show this help text
+    -l              show links only
+    -r              sort in reverse (descending) order
     -v              show version info
