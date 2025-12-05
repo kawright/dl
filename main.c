@@ -104,7 +104,7 @@ I16 main(I16 argc, Ch **argv) {
             file_ct++;
             entry_ct++;
             total_bytes += curr_entry->sz;
-            print_fmt("%-32.32s %-8s %-8lld\n", curr_entry->name, 
+            print_fmt("%-32.32s %-8s %-8llx\n", curr_entry->name, 
                 file_type_str, curr_entry->sz);
             break;
 
