@@ -93,7 +93,7 @@ I16 main(I16 argc, Ch **argv) {
     U16             other_ct            = 0;
     U64             total_bytes         = 0;
     print_ln("NAME                             TYPE     SIZE");
-    print_ln("==================================================");
+    print_ln("====================================================");
     for (U16 i; i < entries.sz; i++) {
         curr_entry = (FileEntry *) get_arr_elem(&entries, i, NIL);
         switch (curr_entry->type) {
@@ -104,7 +104,7 @@ I16 main(I16 argc, Ch **argv) {
             file_ct++;
             entry_ct++;
             total_bytes += curr_entry->sz;
-            print_fmt("%-32.32s %-8s %-8llx\n", curr_entry->name, 
+            print_fmt("%-32.32s %-8s %010llx\n", curr_entry->name, 
                 file_type_str, curr_entry->sz);
             break;
 
@@ -136,7 +136,7 @@ I16 main(I16 argc, Ch **argv) {
             print_fmt("%-32.32s %-8s\n", curr_entry->name, file_type_str);
         }
     }
-    print_ln("==================================================");
+    print_ln("====================================================");
     print_fmt("%d Files; %d Directories; %d Links; %d Other\n", file_ct, dir_ct,
         link_ct, other_ct);
     print_fmt("%d Entries; %lld Bytes\n\n", entry_ct, total_bytes);
