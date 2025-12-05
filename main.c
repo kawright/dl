@@ -87,45 +87,59 @@ I16 main(I16 argc, Ch **argv) {
     FileEntry       *curr_entry         = NIL;
     Ch              *file_type_str      = NIL;
     U16             entry_ct            = 0;
+    U16             file_ct             = 0;
+    U16             link_ct             = 0;
+    U16             dir_ct              = 0;
+    U16             other_ct            = 0;
+    U64             total_bytes         = 0;
     print_ln("NAME                             TYPE     SIZE");
     print_ln("==================================================");
     for (U16 i; i < entries.sz; i++) {
         curr_entry = (FileEntry *) get_arr_elem(&entries, i, NIL);
         switch (curr_entry->type) {
             case FileEntryType_FILE:
+            if (get_argv_flag(&argvp, 'd') || get_argv_flag(&argvp, 'l'))
+                break;
             file_type_str = "FILE";
+            file_ct++;
+            entry_ct++;
+            total_bytes += curr_entry->sz;
+            print_fmt("%-32.32s %-8s %-8lld\n", curr_entry->name, 
+                file_type_str, curr_entry->sz);
             break;
 
             case FileEntryType_DIR:
+            if (get_argv_flag(&argvp, 'f') || get_argv_flag(&argvp, 'l'))
+                break;
             file_type_str = "DIR";
+            dir_ct++;
+            entry_ct++;
+            print_fmt("%-32.32s %-8s\n", curr_entry->name, file_type_str);
             break;
 
             case FileEntryType_LINK:
+            if (get_argv_flag(&argvp, 'f') || get_argv_flag(&argvp, 'd'))
+                break;
             file_type_str = "LINK";
+            link_ct++;
+            entry_ct++;
+            print_fmt("%-32.32s %-8s\n", curr_entry->name, file_type_str);
             break;
 
             default:
+            if (get_argv_flag(&argvp, 'f') || get_argv_flag(&argvp, 'd') ||
+                    get_argv_flag(&argvp, 'l'))
+                break;
             file_type_str = "OTHER";
-        }
-        if (get_argv_flag(&argvp, 'd') && 
-                curr_entry->type != FileEntryType_DIR)
-            continue;
-        if (get_argv_flag(&argvp, 'f') &&
-                curr_entry->type != FileEntryType_FILE)
-            continue;
-        if (get_argv_flag(&argvp, 'l') &&
-                curr_entry->type != FileEntryType_LINK)
-            continue;
-        if (curr_entry->type == FileEntryType_FILE) {
-            print_fmt("%-32.32s %-8s %08llx\n", curr_entry->name, file_type_str, 
-                curr_entry->sz);
-        } else {
+            other_ct++;
+            entry_ct++;
             print_fmt("%-32.32s %-8s\n", curr_entry->name, file_type_str);
         }
-        entry_ct++;
     }
     print_ln("==================================================");
-    print_fmt("Total Entries: %d\n\n", entry_ct);
+    print_fmt("%d Files; %d Directories; %d Links; %d Other\n", file_ct, dir_ct,
+        link_ct, other_ct);
+    print_fmt("%d Entries; %lld Bytes\n\n", entry_ct, total_bytes);
 
     CLEANUP:
     if (is_err(&err))
